@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NovaDescargas: recursos digitales gratuitos.">
+  <title>NovaDescargas | Recursos digitales</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #0b1020;
+      color: #f4f6ff;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 22px 16px;
+      text-align: center;
+      background: #121a30;
+      border-bottom: 1px solid #263451;
+    }
+
+    header h1 { margin: 0; color: #7c9cff; }
+    header p { color: #b9c5df; }
+
+    main {
+      width: min(900px, 92%);
+      margin: 30px auto;
+    }
+
+    .hero {
+      padding: 25px 18px;
+      text-align: center;
+      background: #151f39;
+      border-radius: 18px;
+    }
+
+    .hero h2 { font-size: 28px; }
+    .hero p { color: #c3cce0; line-height: 1.6; }
+
+    input {
+      width: 100%;
+      margin: 20px 0;
+      padding: 14px;
+      border: 1px solid #354465;
+      border-radius: 10px;
+      background: #121a30;
+      color: white;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 20px;
+      background: #151f39;
+      border: 1px solid #263451;
+      border-radius: 14px;
+    }
+
+    .card p { color: #c3cce0; line-height: 1.5; }
+
+    .button {
+      display: inline-block;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 9px;
+      background: #7294ff;
+      color: #091127;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover { background: #9bb2ff; }
+
+    footer {
+      padding: 25px 12px;
+      text-align: center;
+      color: #aebbd5;
+    }
+
+    .note { font-size: 13px; color: #aebbd5; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✦ NovaDescargas</h1>
+    <p>Tu espacio de recursos digitales gratuitos</p>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Encuentra tu próximo recurso</h2>
+      <p>Plantillas, guías y archivos originales
+      para aprender y crear.</p>
+    </section>
+
+    <input
+      id="search"
+      type="search"
+      placeholder="Buscar recursos..."
+      aria-label="Buscar recursos"
+    >
+
+    <section class="grid" id="resources">
+      <article class="card" data-name="guia de bienvenida">
+        <h3>📄 Guía de bienvenida</h3>
+        <p>Un archivo de texto de ejemplo para probar
+        las descargas de tu página.</p>
+        <button class="button" id="download">
+          Descargar gratis
+        </button>
+      </article>
+
+      <article class="card" data-name="plantilla de ideas">
+        <h3>💡 Plantilla de ideas</h3>
+        <p>Un espacio para organizar ideas de proyectos
+        y anotar tus próximos objetivos.</p>
+        <a class="button" href="#contacto">
+          Próximamente
+        </a>
+      </article>
+    </section>
+
+    <p class="note">
+      Los recursos deben ser propios o contar con permiso
+      para compartirlos.
+    </p>
+  </main>
+
+  <footer id="contacto">
+    <p>NovaDescargas © 2026</p>
+    <p>Creado para compartir recursos útiles.</p>
+  </footer>
+
+  <script>
+    const search = document.getElementById("search");
+    const cards = document.querySelectorAll(".card");
+
+    search.addEventListener("input", () => {
+      const query = search.value.toLowerCase().trim();
+
+      cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.hidden = !name.includes(query);
+      });
+    });
+
+    document.getElementById("download").addEventListener(
+      "click", () => {
+        const content =
+          "Bienvenido a NovaDescargas.\\n\\n" +
+          "Este es tu primer archivo descargable.\\n" +
+          "¡Sigue creando proyectos!";
+
+        const file = new Blob([content], {
+          type: "text/plain;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(file);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "guia-novadescargas.txt";
+        link.click();
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+    );
+  </script>
+</body>
+          </html>
+          
